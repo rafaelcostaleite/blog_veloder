@@ -1,0 +1,1 @@
+print("Sucesso!! Projeto Blog Veloder.")
