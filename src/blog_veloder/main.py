@@ -1,1 +1,1 @@
-print("Sucesso!! Projeto Blog Veloder.")
+print("Sucesso!!! Projeto Blog Veloder.")
