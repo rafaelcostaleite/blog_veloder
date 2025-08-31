@@ -1,0 +1,10 @@
+description: Analisar todos os arquivos JSON de pesquisa e criar um post completo para WordPress, estruturado em HTML, com título atrativo, introdução, desenvolvimento e conclusão.
+
+expected_output: Um arquivo HTML contendo:
+- Título otimizado para SEO
+- Estrutura com h1, h2, h3 apropriados
+- Parágrafos bem estruturados
+- Lista de pontos importantes (quando aplicável)
+- Links para fontes (quando apropriado)
+- Meta descrição sugerida
+- Tags sugeridas para WordPress

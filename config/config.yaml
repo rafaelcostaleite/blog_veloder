@@ -1,0 +1,13 @@
+agents:
+  model: "gemini-1.5-flash"
+  temperature: 0.7
+  verbose: true
+
+search:
+  max_results: 10
+  country: "br"
+  language: "pt"
+
+output:
+  format: "html"
+  max_words: 1500

@@ -1,0 +1,25 @@
+
+Crie um novo projeto com multi-agentes de IA com objetivo de buscar informações na internet e criar um post de Wordpress.
+
+O projeto deve ser desenvolvido em /mnt/c/Projetos/blog_veloder.
+
+O projeto deve ser simplificado e reduzido. 
+Seja enxuto criando um projeto de fácil compreensão.
+
+Recomendações:
+- Agende de IA: Gemini
+- Pesquisa na internet: SERPER
+- CrewAI para criar os multi agentes
+- Utilize arquivos .env e config.yaml para os parâmetros gerais e configurações.
+- Crie arquivos texto para descrever as caracteristicas de cada agente e suas tarefas no CrewAI. Facilitando a edição dessas informações.
+- Crie um arquivo texto para indicar o assunto de pesquisa. Este arquivo deve ficar em /data/input/subject.
+- O post final deve ser gravado em /data/output/post.
+
+Arquitetura:
+- Crie um container para executar o processo.
+
+Regras de negócio:
+- A partir do arquivo de pesquisa.
+- Um agente pesquisador efetua a busca na internet. O resultado é um JSON gravado na pasta /data/input/search.
+- Um agente jornalista lê todos os arquivos de /data/input/search e escreve um post para Wordpress;
+- O resultado final é um html criado na pasta /data/output/post.

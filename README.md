@@ -1,32 +1,92 @@
-# README.md
-# 🏊‍♂️🚴‍♂️🏃‍♂️ Triathlon CrewAI - Automação de Blog
+# Blog Veloder - Multi-Agent AI System
 
-![Python](https://img.shields.io/badge/python-v3.8+-blue.svg)
-![CrewAI](https://img.shields.io/badge/CrewAI-v0.28.8-green.svg)
-![License](https://img.shields.io/badge/license-MIT-blue.svg)
+Sistema simplificado de multi-agentes IA para pesquisar informações na internet e gerar posts para WordPress.
 
-Um projeto completo usando **CrewAI** para automatizar a criação de conteúdo sobre triathlon, com 3 agentes especializados trabalhando em sequência para pesquisar, escrever e otimizar posts para blog.
+## Arquitetura
 
-## 🎯 Objetivo
+- **Agente Pesquisador**: Busca informações na web usando SERPER API
+- **Agente Jornalista**: Transforma dados de pesquisa em posts HTML para WordPress
+- **IA**: Google Gemini 1.5 Flash
+- **Orquestração**: CrewAI
 
-Criar um fluxo automatizado que:
-1. **Pesquisa** provas de triathlon na internet
-2. **Escreve** posts otimizados aplicando técnicas de "Brevidade Inteligente"
-3. **Otimiza** o conteúdo para SEO e WordPress
+## Estrutura do Projeto
 
-## 🤖 Agentes
+```
+blog_veloder/
+├── data/
+│   ├── input/
+│   │   ├── subject/topic.txt     # Tema da pesquisa
+│   │   └── search/               # Resultados JSON das pesquisas
+│   └── output/
+│       └── post/                 # Posts HTML gerados
+├── src/
+│   ├── agents/                   # Configurações dos agentes
+│   ├── tasks/                    # Descrições das tarefas
+│   ├── agents.py                 # Criação dos agentes CrewAI
+│   ├── tools.py                  # Ferramenta SERPER
+│   └── post_generator.py         # Gerador de posts HTML
+├── config/
+│   └── config.yaml              # Configurações gerais
+├── .env                         # Variáveis de ambiente
+├── docker-compose.yml           # Configuração Docker
+├── Dockerfile                   # Imagem Docker
+├── requirements.txt             # Dependências Python
+└── main.py                      # Script principal
+```
 
-### 1. **Research Agent** - Especialista em Pesquisa
-- 🔍 Pesquisa provas de triathlon no Brasil
-- 📊 Estrutura dados em formato JSON
-- 🎯 Coleta informações detalhadas (datas, locais, inscrições)
+## Configuração
 
-### 2. **Content Writer Agent** - Redator Especialista
-- ✍️ Transforma dados em posts envolventes
-- 📚 Aplica técnicas de "Brevidade Inteligente"
-- 🎨 Cria conteúdo otimizado para engajamento
+1. **Configure as APIs**:
+   ```bash
+   cp .env.example .env
+   ```
+   Edite o arquivo `.env` com suas chaves:
+   - `GOOGLE_API_KEY`: Chave da API do Google Gemini
+   - `SERPER_API_KEY`: Chave da API do SERPER
 
-### 3. **SEO Optimizer Agent** - Especialista em SEO
-- 🎯 Otimiza posts para mecanismos de busca
-- 📈 Implementa melhores práticas de SEO
-- 📊 Gera relatórios detalhados de análise
+2. **Defina o tema de pesquisa**:
+   Edite `data/input/subject/topic.txt` com o assunto desejado.
+
+## Execução
+
+### Com Docker (Recomendado)
+```bash
+docker-compose up --build
+```
+
+### Local
+```bash
+pip install -r requirements.txt
+python main.py
+```
+
+## Funcionamento
+
+1. **Pesquisa**: O agente pesquisador lê o tema em `data/input/subject/topic.txt` e busca informações usando SERPER
+2. **Armazenamento**: Resultados são salvos como JSON em `data/input/search/`
+3. **Criação**: O agente jornalista analisa os dados e cria um post HTML
+4. **Output**: Post final é salvo em `data/output/post/`
+
+## Configurações
+
+### config/config.yaml
+- Modelo de IA (padrão: gemini-1.5-flash)
+- Temperatura da geração
+- Parâmetros de pesquisa
+
+### Agentes (src/agents/)
+- `researcher.txt`: Configuração do pesquisador
+- `journalist.txt`: Configuração do jornalista
+
+### Tarefas (src/tasks/)
+- `research_task.txt`: Descrição da tarefa de pesquisa
+- `writing_task.txt`: Descrição da tarefa de escrita
+
+## Resultado
+
+O sistema gera um arquivo HTML completo com:
+- Estrutura otimizada para WordPress
+- Meta tags SEO
+- Links para fontes
+- Formatação adequada (H1, H2, parágrafos, listas)
+- Data de criação automática
