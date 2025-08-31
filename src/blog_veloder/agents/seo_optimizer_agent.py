@@ -97,7 +97,7 @@ Slug: /melhores-provas-triathlon-brasil-2024/
         
         content = re.sub(
             r'^## O Que Você Vai Descobrir Aqui',
-            r'## Guia Completo: Triathlon Brasil 2024',
+            r'## Guia Completo: Triathlon Brasil 2025',
             content,
             flags=re.MULTILINE
         )

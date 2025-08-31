@@ -11,7 +11,7 @@ class TriathlonSearchTool:
     def __init__(self):
         self.search_tool = SerperDevTool()
     
-    def search_triathlon_events(self, query: str = "triathlon events 2024 brasil") -> str:
+    def search_triathlon_events(self, query: str = "triathlon events 2025 brasil") -> str:
         """Pesquisa provas de triathlon e estrutura os dados"""
         
         try:

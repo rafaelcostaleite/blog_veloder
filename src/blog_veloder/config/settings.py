@@ -6,7 +6,7 @@ load_dotenv()
 class Settings:
     """Configurações globais do projeto"""
     
-    OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
+    GOOGLE_API_KEY = os.getenv("GOOGLE_API_KEY")
     SERPER_API_KEY = os.getenv("SERPER_API_KEY")
     
     # Diretórios
@@ -14,13 +14,13 @@ class Settings:
     OUTPUT_DIR = "output"
     
     # Configurações dos modelos
-    DEFAULT_MODEL = "gpt-4-turbo-preview"
+    DEFAULT_MODEL = "gemini-1.5-pro"
     TEMPERATURE = 0.7
     
     @classmethod
     def validate_config(cls):
         """Valida se todas as configurações necessárias estão presentes"""
-        required_vars = ["OPENAI_API_KEY", "SERPER_API_KEY"]
+        required_vars = ["GOOGLE_API_KEY", "SERPER_API_KEY"]
         missing_vars = [var for var in required_vars if not getattr(cls, var)]
         
         if missing_vars:

@@ -1,5 +1,5 @@
 from crewai import Crew, Task
-from langchain_openai import ChatOpenAI
+from langchain_google_genai import ChatGoogleGenerativeAI
 from config.settings import Settings
 from agents.research_agent import TriathlonResearchAgent
 from agents.content_writer_agent import ContentWriterAgent
@@ -15,10 +15,10 @@ def main():
         Settings.validate_config()
         
         # Inicializa o modelo de linguagem
-        llm = ChatOpenAI(
+        llm = ChatGoogleGenerativeAI(
             model=Settings.DEFAULT_MODEL,
             temperature=Settings.TEMPERATURE,
-            api_key=Settings.OPENAI_API_KEY
+            google_api_key=Settings.GOOGLE_API_KEY
         )
         
         # Cria os diretórios necessários
@@ -34,7 +34,7 @@ def main():
         
         # Define as tarefas
         research_task = Task(
-            description="""Realizar pesquisa abrangente sobre provas de triathlon no Brasil para 2024.
+            description="""Realizar pesquisa abrangente sobre provas de triathlon no Brasil para 2025.
             Coletar informações sobre datas, locais, distâncias, preços de inscrição e websites oficiais.
             Estruturar os dados em formato JSON organizado e salvar no arquivo data/triathlon_events.json""",
             agent=research_agent.agent,

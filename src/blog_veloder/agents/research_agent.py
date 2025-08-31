@@ -28,7 +28,7 @@ class TriathlonResearchAgent:
         
         # Query de pesquisa otimizada
         search_queries = [
-            "triathlon events Brazil 2024 upcoming races",
+            "triathlon events Brazil 2025 upcoming races",
             "ironman triathlon Brasil calendar",
             "provas triathlon nacionais brasileiras"
         ]
