@@ -4,8 +4,7 @@ import yaml
 from dotenv import load_dotenv
 from crewai import Crew
 from langchain_google_genai import ChatGoogleGenerativeAI
-from src.agents import create_research_agent, create_journalist_agent, create_research_task, create_writing_task
-from src.post_generator import WordPressPostGenerator
+from src.agents import create_research_agent, create_journalist_agent, create_design_agent, create_seo_agent, create_research_task, create_writing_task, create_design_task, create_seo_task
 
 def load_config():
     with open('config/config.yaml', 'r', encoding='utf-8') as f:
@@ -46,58 +45,29 @@ def main():
     
     researcher = create_research_agent(llm)
     journalist = create_journalist_agent(llm)
+    designer = create_design_agent(llm)
+    seo_expert = create_seo_agent(llm)
     
     research_task = create_research_task(researcher, subject)
     writing_task = create_writing_task(journalist, subject)
+    design_task = create_design_task(designer, subject)
+    seo_task = create_seo_task(seo_expert, subject)
     
     crew = Crew(
-        agents=[researcher, journalist],
-        tasks=[research_task, writing_task],
+        agents=[researcher, journalist, designer, seo_expert],
+        tasks=[research_task, writing_task, design_task, seo_task],
         verbose=config['agents']['verbose']
     )
     
-    print("🔍 Executando pesquisa...")
+    print("🔍 Executando pipeline completo...")
+    print("📝 Fluxo: Pesquisador → Jornalista → Designer → SEO Expert")
     try:
         result = crew.kickoff()
         
-        print("✅ Processo concluído!")
-        print(f"📄 Resultado: {result}")
+        print("✅ Pipeline concluído!")
+        print(f"📄 Resultado final: {result}")
         
-        post_generator = WordPressPostGenerator()
-        search_data = post_generator.load_search_data()
-        
-        if search_data:
-            content_pieces, sources = post_generator.extract_content_from_search(search_data)
-            
-            if content_pieces:
-                content = f"""
-                <h2>Introdução</h2>
-                <p>Este artigo apresenta informações atualizadas sobre {subject}.</p>
-                
-                <h2>Conteúdo Principal</h2>
-                {"".join([f"<div>{piece}</div>" for piece in content_pieces[:5]])}
-                
-                <h2>Conclusão</h2>
-                <p>As informações apresentadas mostram a relevância e atualidade do tema {subject}.</p>
-                
-                <h3>Fontes</h3>
-                <ul>
-                {"".join([f"<li><a href='{source}' target='_blank'>{source}</a></li>" for source in sources[:5]])}
-                </ul>
-                """
-                
-                html_file = post_generator.generate_html_post(
-                    content=content,
-                    title=f"Tudo sobre {subject}",
-                    meta_description=f"Informações completas e atualizadas sobre {subject}",
-                    tags=f"{subject}, blog, informação"
-                )
-                
-                print(f"📝 Post HTML gerado: {html_file}")
-            else:
-                print("⚠️  Nenhum conteúdo encontrado nos dados de pesquisa")
-        else:
-            print("⚠️  Nenhum dado de pesquisa encontrado")
+        print("🎉 Post HTML otimizado salvo em /data/output/post/!")
             
     except Exception as e:
         print(f"❌ Erro durante execução: {e}")

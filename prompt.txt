@@ -20,6 +20,20 @@ Arquitetura:
 
 Regras de negócio:
 - A partir do arquivo de pesquisa.
-- Um agente pesquisador efetua a busca na internet. O resultado é um JSON gravado na pasta /data/input/search.
-- Um agente jornalista lê todos os arquivos de /data/input/search e escreve um post para Wordpress;
-- O resultado final é um html criado na pasta /data/output/post.
+- Um agente pesquisador efetua a busca na internet. O resultado é um JSON a ser enviado para o próximo agente;
+- Um agente jornalista recebe o arquivo JSON e escreve um post para Wordpress em no formato markdown;
+- O resultado final é um arquivo criado na pasta /data/output/post.
+
+---//---
+Nova regra de negócio. Os arquivos intermediarios entre um agente e outro não devem ser gravados na pasta data.
+Regras de negócio atualizada:
+- A partir do arquivo de pesquisa.
+- Um agente pesquisador efetua a busca na internet. O resultado é um JSON a ser enviado para o próximo agente;
+- Um agente jornalista recebe o arquivo JSON e escreve um post para Wordpress em no formato markdown;
+- O resultado final é um arquivo criado na pasta /data/output/post.
+
+---//---
+Adicione dois novos agentes.
+-Novo agente design. Ele atua após o agente jornalista, recebe o texto em markdown e cria um html com design responsivo pensando para mobile.
+-- Utilie como modelo um arquivo template.html a ser gravado na pasta data/input/template. Assim o html poderá ser facilmente alterado.
+- Novo agente especialista SEO. Ele recebe o html do agente de design e revisa o html aplicando as melhores práticas de SEO. 
