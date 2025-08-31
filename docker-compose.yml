@@ -1,0 +1,12 @@
+version: '3.8'
+
+services:
+  blog_veloder:
+    build: .
+    container_name: blog_veloder_app
+    volumes:
+      - ./data:/app/data
+      - ./config:/app/config
+    env_file:
+      - .env
+    working_dir: /app

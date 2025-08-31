@@ -1,0 +1,8 @@
+description: Realizar pesquisa abrangente na internet sobre o tema fornecido, coletando informações de fontes confiáveis e organizando os dados em formato JSON para posterior análise.
+
+expected_output: Um arquivo JSON contendo:
+- Título da pesquisa
+- Lista de fontes encontradas com URLs
+- Resumos dos principais pontos de cada fonte
+- Dados relevantes e estatísticas (quando disponíveis)
+- Data da pesquisa

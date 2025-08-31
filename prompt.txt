@@ -1,0 +1,39 @@
+
+Crie um novo projeto com multi-agentes de IA com objetivo de buscar informações na internet e criar um post de Wordpress.
+
+O projeto deve ser desenvolvido em /mnt/c/Projetos/blog_veloder.
+
+O projeto deve ser simplificado e reduzido. 
+Seja enxuto criando um projeto de fácil compreensão.
+
+Recomendações:
+- Agende de IA: Gemini
+- Pesquisa na internet: SERPER
+- CrewAI para criar os multi agentes
+- Utilize arquivos .env e config.yaml para os parâmetros gerais e configurações.
+- Crie arquivos texto para descrever as caracteristicas de cada agente e suas tarefas no CrewAI. Facilitando a edição dessas informações.
+- Crie um arquivo texto para indicar o assunto de pesquisa. Este arquivo deve ficar em /data/input/subject.
+- O post final deve ser gravado em /data/output/post.
+
+Arquitetura:
+- Crie um container para executar o processo.
+
+Regras de negócio:
+- A partir do arquivo de pesquisa.
+- Um agente pesquisador efetua a busca na internet. O resultado é um JSON a ser enviado para o próximo agente;
+- Um agente jornalista recebe o arquivo JSON e escreve um post para Wordpress em no formato markdown;
+- O resultado final é um arquivo criado na pasta /data/output/post.
+
+---//---
+Nova regra de negócio. Os arquivos intermediarios entre um agente e outro não devem ser gravados na pasta data.
+Regras de negócio atualizada:
+- A partir do arquivo de pesquisa.
+- Um agente pesquisador efetua a busca na internet. O resultado é um JSON a ser enviado para o próximo agente;
+- Um agente jornalista recebe o arquivo JSON e escreve um post para Wordpress em no formato markdown;
+- O resultado final é um arquivo criado na pasta /data/output/post.
+
+---//---
+Adicione dois novos agentes.
+-Novo agente design. Ele atua após o agente jornalista, recebe o texto em markdown e cria um html com design responsivo pensando para mobile.
+-- Utilie como modelo um arquivo template.html a ser gravado na pasta data/input/template. Assim o html poderá ser facilmente alterado.
+- Novo agente especialista SEO. Ele recebe o html do agente de design e revisa o html aplicando as melhores práticas de SEO. 
